@@ -1,5 +1,3 @@
-# cowrywise
-
 ## Project setup
 ```
 yarn install
