@@ -5,9 +5,10 @@
 </template>
 
 <script>
- const MOVE_CLASS_PROP = "_wfMoveClass";
+ const MOVE_CLASS_PROP = "_wfMoveClass"; //set a constant variable here
  export default {
   props: {
+   //props with validations
    autoResize: {
     default: true
    },
@@ -17,7 +18,7 @@
    },
    align: {
     default: "left",
-    validator: (val) => ~["left", "right", "center"].indexOf(val)
+    validator: (val) => ~["left", "right", "center"].indexOf(val) //look for prop value in the array provided
    },
    line: {
     default: "v",
@@ -59,11 +60,13 @@
    reflow
   },
   created() {
-   this.virtualRects = [];
+   this.virtualRects = []; //array variable
    this.$on("reflow", () => {
+    //listen for reflow event whenever it get emitted, call reflowHandler function
     this.reflowHandler();
    });
    this.$watch(
+    //watch if there's any changes on created && reflowHandler()
     () => (
      this.align,
      this.line,
@@ -76,10 +79,10 @@
     ),
     this.reflowHandler
    );
-   this.$watch("grow", this.reflowHandler);
+   this.$watch("grow", this.reflowHandler); //watch grow prop && reflowHandler()
   },
   mounted() {
-   this.$watch("autoResize", this.autoResizeHandler);
+   this.$watch("autoResize", this.autoResizeHandler); //watch autoResize prop && autoResizeHandler()
    on(this.$el, getTransitionEndEvent(), tidyUpAnimations, true);
    this.autoResizeHandler(this.autoResize);
   },
@@ -340,6 +343,7 @@
    metas[i].vm.rect = rect;
    for (let prop in rect) {
     style[prop] = rect[prop] + "px";
+    console.log(prop);
    }
   });
  }
