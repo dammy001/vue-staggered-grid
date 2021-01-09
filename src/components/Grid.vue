@@ -403,9 +403,11 @@
   }
  }
  function on(elem, type, listener, useCapture = false) {
+  //add event listener using the parameters passed
   elem.addEventListener(type, listener, useCapture);
  }
  function off(elem, type, listener, useCapture = false) {
+  //remove event listener using the parameters passed
   elem.removeEventListener(type, listener, useCapture);
  }
 </script>

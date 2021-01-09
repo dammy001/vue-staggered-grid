@@ -12,28 +12,7 @@
   <div class="flex justify-center mt-5" v-if="error">
    {{ error }}
   </div>
-  <grid
-   :line="line"
-   :line-gap="200"
-   :min-line-gap="180"
-   :max-line-gap="220"
-   :watch="items"
-   @reflowed="reflowed"
-   ref="waterfall"
-  >
-   <!-- each component is wrapped by a waterfall slot -->
-   <grid-slot
-    v-for="(item, index) in items"
-    :width="item.width"
-    :height="item.height"
-    :order="index"
-    :key="item.index"
-    move-class="item-move"
-   >
-    <div class="item" :style="item.style" :index="item.index"></div>
-   </grid-slot>
-  </grid>
-  <!-- <div class="md:px-48 -mt-8 flex justify-center mb-10">
+  <div class="md:px-48 -mt-8 flex justify-center mb-10">
    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-5">
     <template v-if="loading">
      <skeleton-loader
@@ -57,26 +36,36 @@
      </skeleton-loader>
     </template>
     <template v-else>
-     <photo
-                        v-for="(photo, i) in maxPhotos"
-                        :key="i"
-                        :index="i"
-                        :photo="photo"
-                    ></photo>
-     <grid :line-gap="200" :watch="maxPhotos">
+     <!-- <photo
+      v-for="(photo, i) in maxPhotos"
+      :key="i"
+      :index="i"
+      :photo="photo"
+     ></photo> -->
+     <grid
+      :line="line"
+      :line-gap="200"
+      :min-line-gap="180"
+      :max-line-gap="220"
+      :watch="items"
+      @reflowed="reflowed"
+      ref="waterfall"
+     >
+      <!-- each component is wrapped by a waterfall slot -->
       <grid-slot
-       v-for="(photo, index) in maxPhotos"
-       :width="500"
-       :height="500"
+       v-for="(item, index) in items"
+       :width="item.width"
+       :height="item.height"
        :order="index"
-       :key="photo.id"
+       :key="item.index"
+       move-class="item-move"
       >
-       <photo :photo="photo"></photo>
+       <div class="item" :style="item.style" :index="item.index"></div>
       </grid-slot>
      </grid>
     </template>
    </div>
-  </div> -->
+  </div>
  </div>
 </template>
 <script>
