@@ -343,7 +343,6 @@
    metas[i].vm.rect = rect;
    for (let prop in rect) {
     style[prop] = rect[prop] + "px";
-    console.log(prop);
    }
   });
  }

@@ -1,15 +1,15 @@
 <template>
- <div class="grid-slot" v-if="show">
+ <div class="absolute p-0 m-0 box-border" v-show="isShow">
   <slot></slot>
  </div>
 </template>
+
 <script>
  export default {
   data: () => ({
-   show: false
+   isShow: false
   }),
   props: {
-   //set props
    width: {
     required: true,
     validator: (val) => val >= 0
@@ -26,35 +26,32 @@
    }
   },
   methods: {
-   notify: function() {
-    this.$parent.$emit("reflow", this); //emit reflow function from parent component
+   notify() {
+    this.$parent.$emit("reflow", this);
    },
-   getMeta: function() {
-    //getMeta function that return object data
+   getMeta() {
     return {
      vm: this,
-     node: this.$el, //The root DOM element that the Vue instance is managing.
+     node: this.$el,
      order: this.order,
      width: this.width,
      height: this.height,
-     moveClass: this.customClass
+     moveClass: this.moveClass
     };
    }
   },
   created() {
-   (this.rect = {
+   this.rect = {
     top: 0,
     left: 0,
     width: 0,
     height: 0
-   }),
-    this.$watch(() => (this.width, this.height), this.notify);
-   //watch width and height and there's any changes, render notify function
+   };
+   this.$watch(() => (this.width, this.height), this.notify);
   },
   mounted() {
    this.$parent.$once("reflowed", () => {
-    //listen for reflowed event once on parent component
-    this.show = true;
+    this.isShow = true;
    });
    this.notify();
   },
