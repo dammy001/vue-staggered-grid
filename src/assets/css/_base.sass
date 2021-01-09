@@ -37,6 +37,9 @@ body
 	@include background
 	background-size: 100% 100%
 
+.grid-slot
+	@apply absolute p-0
+
 .modal
 	@apply cursor-pointer
 	@apply duration-500
@@ -65,7 +68,7 @@ body
 		@apply text-gray-500
 		@apply top-5 right-5 text-sm h-20px w-20px
 			&:focus
-			@apply outline-none
+				@apply outline-none
 	&.open
 		@apply opacity-100
 		@apply visible
