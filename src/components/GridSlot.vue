@@ -12,10 +12,12 @@
   props: {
    width: {
     required: true,
+    default: 100,
     validator: (val) => val >= 0
    },
    height: {
     required: true,
+    default: 100,
     validator: (val) => val >= 0
    },
    order: {
