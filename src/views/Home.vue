@@ -43,7 +43,6 @@
                         :photo="photo"
                     ></photo> -->
      <grid :line-gap="200" :watch="maxPhotos">
-      <!-- each component is wrapped by a waterfall slot -->
       <grid-slot
        v-for="(photo, index) in maxPhotos"
        :width="500"
