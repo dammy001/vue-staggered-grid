@@ -13,26 +13,28 @@
    {{ error }}
   </div>
   <grid
-   :line="line"
-   :line-gap="100"
+   :line-gap="300"
    :min-line-gap="150"
    :max-line-gap="200"
+   align="center"
    :watch="items"
    @reflowed="reflowed"
    ref="waterfall"
   >
-   <grid-slot
-    v-for="(item, index) in items"
-    :width="item.width"
-    :height="item.height"
-    :order="index"
-    :key="item.index"
-    move-class="item-move"
-   >
-    <div class="sm:px-48">
-     <div class="w-48 h-48" :style="item.style" :index="item.index"></div>
-    </div>
-   </grid-slot>
+   <div class="grid grid-cols-2 sm:grid-cols-3 gap-5 w-full">
+    <grid-slot
+     v-for="(item, index) in items"
+     :width="item.width"
+     :height="item.height"
+     :order="index"
+     :key="item.index"
+     move-class="item-move"
+    >
+     <div>
+      <div class="w-56 h-56 flex" :style="item.style" :index="item.index"></div>
+     </div>
+    </grid-slot>
+   </div>
   </grid>
   <!-- <div class="md:px-48 -mt-8 flex justify-center mb-10 w-full">
    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-5 w-full">
@@ -76,12 +78,11 @@
  export default {
   data: () => ({
    loading: false,
-   line: "h",
-   isBusy: false,
+   isLoading: false,
    searchQuery: "",
    errorMessage: {},
    searchLoading: false,
-   items: generateRandomItems(5)
+   items: generateRandomItems(10)
   }),
   beforeMount() {
    this.getPhotos();
@@ -101,10 +102,9 @@
     this.loading = false;
    },
    addItems() {
-    if (!this.isBusy && this.items.length < 20) {
-     this.isBusy = true;
+    if (!this.isLoading && this.items.length < 50) {
+     this.isLoading = true;
      this.items = [...this.items, ...generateRandomItems(5)];
-     //this.items.push.apply(this.items, generateRandomItems(5));
     }
    },
    shuffle() {
@@ -113,7 +113,7 @@
     });
    },
    reflowed() {
-    this.isBusy = false;
+    this.isLoading = false;
    }
   },
   mounted() {
