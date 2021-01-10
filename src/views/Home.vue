@@ -12,7 +12,29 @@
   <div class="flex justify-center mt-5" v-if="error">
    {{ error }}
   </div>
-  <div class="md:px-48 -mt-8 flex justify-center mb-10 w-full">
+  <grid
+   :line="line"
+   :line-gap="100"
+   :min-line-gap="150"
+   :max-line-gap="200"
+   :watch="items"
+   @reflowed="reflowed"
+   ref="waterfall"
+  >
+   <grid-slot
+    v-for="(item, index) in items"
+    :width="item.width"
+    :height="item.height"
+    :order="index"
+    :key="item.index"
+    move-class="item-move"
+   >
+    <div class="sm:px-48">
+     <div class="w-48 h-48" :style="item.style" :index="item.index"></div>
+    </div>
+   </grid-slot>
+  </grid>
+  <!-- <div class="md:px-48 -mt-8 flex justify-center mb-10 w-full">
    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-5 w-full">
     <template v-if="loading">
      <skeleton-loader
@@ -36,35 +58,16 @@
      </skeleton-loader>
     </template>
     <template v-else>
-     <!-- <photo
+     <photo
       v-for="(photo, i) in maxPhotos"
       :key="i"
       :index="i"
       :photo="photo"
-     ></photo> -->
-     <grid
-      :line="line"
-      :line-gap="200"
-      :min-line-gap="180"
-      :max-line-gap="220"
-      :watch="items"
-      @reflowed="reflowed"
-      ref="waterfall"
-     >
-      <grid-slot
-       v-for="(item, index) in items"
-       :width="item.width"
-       :height="item.height"
-       :order="index"
-       :key="item.index"
-       move-class="item-move"
-      >
-       <div class="w-32 h-32" :style="item.style" :index="item.index"></div>
-      </grid-slot>
-     </grid>
+     ></photo>
+     
     </template>
    </div>
-  </div>
+  </div> -->
  </div>
 </template>
 <script>
@@ -78,7 +81,7 @@
    searchQuery: "",
    errorMessage: {},
    searchLoading: false,
-   items: generateRandomItems(15)
+   items: generateRandomItems(5)
   }),
   beforeMount() {
    this.getPhotos();
@@ -100,12 +103,12 @@
    addItems() {
     if (!this.isBusy && this.items.length < 20) {
      this.isBusy = true;
-     //this.items = [...this.items, ...generateRandomItems(50)];
-     this.items.push.apply(this.items, generateRandomItems(50));
+     this.items = [...this.items, ...generateRandomItems(5)];
+     //this.items.push.apply(this.items, generateRandomItems(5));
     }
    },
    shuffle() {
-    this.items.sort(function() {
+    this.items.sort(() => {
      return Math.random() - 0.5;
     });
    },
