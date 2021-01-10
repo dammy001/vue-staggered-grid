@@ -31,7 +31,13 @@
      move-class="item-move"
     >
      <div>
-      <div class="w-56 h-56 flex" :style="item.style" :index="item.index"></div>
+      <div class="w-56 h-56 flex" :style="item.style" :index="index"></div>
+      <!-- <photo
+       :key="index"
+       class="w-56 h-56"
+       :index="index"
+       :photo="item"
+      ></photo> -->
      </div>
     </grid-slot>
    </div>
@@ -94,7 +100,17 @@
 
     await this.sendRequest("photos.allPhotos")
      .then((response) => {
-      this.allPhotos(response.data.results);
+      const photos = response?.data?.results?.map((photo) => ({
+       index: photo?.id,
+       urls: photo?.urls,
+       user: photo?.user,
+       style: {
+        background: getRandomColor()
+       },
+       width: 500 + ~~(Math.random() * 50),
+       height: 500 + ~~(Math.random() * 50)
+      }));
+      this.allPhotos(photos);
      })
      .catch((error) => {
       this.errorMessage = error;

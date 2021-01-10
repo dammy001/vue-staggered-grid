@@ -54,30 +54,6 @@
    },
    location() {
     return this.user?.location;
-   },
-   textHeight() {
-    return this.index === 0
-     ? "mt-24"
-     : this.index === 1
-     ? "mt-40 sm:mt-48"
-     : this.index === 5
-     ? "mt-40"
-     : this.index === 6
-     ? "mt-32"
-     : "mt-40";
-   },
-   staggeredGrid() {
-    return this.index === 0
-     ? "h-150px"
-     : this.index === 1
-     ? "h-200px sm:h-250px"
-     : this.index === 3
-     ? "mt-0 sm:-mt-24"
-     : this.index === 5
-     ? "mt-5 sm:-mt-10"
-     : this.index === 6
-     ? "-mt-3 sm:-mt-20"
-     : "h-200px";
    }
   },
   methods: {
