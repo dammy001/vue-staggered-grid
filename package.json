@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "axios": "0.26.1",
-    "core-js": "3.22.2",
+    "core-js": "3.25.2",
     "sass": "1.50.1",
     "tailwindcss": "3.1.8",
     "vue": "2.6.14",
