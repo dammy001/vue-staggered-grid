@@ -24,7 +24,7 @@
     "@vue/cli-service": "4.5.19",
     "babel-eslint": "10.1.0",
     "eslint": "8.25.0",
-    "eslint-plugin-vue": "9.6.0",
+    "eslint-plugin-vue": "9.8.0",
     "node-sass": "4.14.1",
     "sass-loader": "8.0.2",
     "vue-template-compiler": "2.7.13"
